@@ -114,9 +114,8 @@ The project generates reports including:
   - Inventory Report
   - Payment Report
 
-# 🚀 How to Run
-
-Step
+How to Run
+Step 1
 Run
 create_table.sql
 
