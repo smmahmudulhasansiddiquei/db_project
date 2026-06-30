@@ -114,3 +114,56 @@ SELECT *
 FROM customers
 WHERE city='Dhaka'
 AND email LIKE '%gmail.com';
+
+
+
+
+--------------------------------join operation------------------------------
+
+--Products Never Ordered
+SELECT
+    p.product_name
+FROM products p
+LEFT JOIN order_items oi
+ON p.product_id = oi.product_id
+WHERE oi.product_id IS NULL;
+
+--Categories without Products
+SELECT
+    c.category_name
+FROM categories c
+LEFT JOIN products p
+ON c.category_id = p.category_id
+WHERE p.product_id IS NULL;
+
+
+--group by---------
+--Total Orders per Customer
+SELECT
+    customer_id,
+    COUNT(order_id) AS total_orders
+FROM orders
+GROUP BY customer_id;
+
+--Product Count by Category
+SELECT
+    category_id,
+    COUNT(product_id) AS total_products
+FROM products
+GROUP BY category_id;
+
+--Total Stock by Category
+SELECT
+    category_id,
+    SUM(stock_quantity) AS stock
+FROM products
+GROUP BY category_id;
+
+
+--Payment Method whose total sales > 50000
+SELECT
+    payment_method,
+    SUM(amount) AS total_sales
+FROM payments
+GROUP BY payment_method
+HAVING SUM(amount) > 50000;
